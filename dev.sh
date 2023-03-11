@@ -1,12 +1,15 @@
 HERE=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 project_name_cache=./cache/current_project
 
+# https://doc.rust-lang.org/cargo/index.html
+# https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/second-edition/ch01-00-introduction.html
+
 case $1 in
     -b)
-        # cat $project_name_cache | xargs -I {} cd ./main/{} && pwd
+        # rustup target add x86_64-unknown-linux-musl
         proj=$(cat $project_name_cache)
         cd ./main/$proj
-        cargo build
+        cargo build --target=x86_64-unknown-linux-musl
     ;;
     -br)
         proj=$(cat $project_name_cache)
